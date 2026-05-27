@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paludo & Mila｜暖心台灣豬 天然寵物手作零嘴</title>
+  <title>Paludo & Mila｜天然手作寵物零嘴 溫暖相伴每一刻</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,700;1,400&family=Noto+Serif+TC:wght=400;500;600&family=Noto+Sans+TC:wght=300;400;500&family=Caveat:wght=400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --kraft:     #c8a97a;
@@ -95,7 +95,7 @@
       overflow: hidden; box-shadow: 20px 30px 60px rgba(61,43,26,0.08);
       transform: rotate(0.5deg);
     }
-    .hero-img-box img { width: 100%; display: block; }
+    .hero-img-box img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/5; }
 
     /* ── SECTION COMMONS ── */
     section { padding: 6rem 0; }
@@ -130,6 +130,112 @@
     
     .btn-line { background: var(--line-green); color: white; gap: 0.5rem; }
     .btn-line:hover { opacity: 0.9; transform: scale(1.05); }
+
+    /* ── BRAND STORY SECTION ── */
+    .story-section {
+      background: linear-gradient(to bottom, var(--cream), var(--warm), var(--cream));
+      border-radius: 4rem;
+      padding: 6rem 0;
+      margin: 4rem 0;
+    }
+    /* 主角介紹卡片 */
+    .characters-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 5rem;
+    }
+    .character-card {
+      background: white;
+      border: 1px solid rgba(200,169,122,0.15);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(61,43,26,0.03);
+    }
+    .character-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--paper);
+    }
+    .character-details h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem;
+      color: var(--bark);
+      margin-bottom: 0.5rem;
+    }
+    .character-details .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: var(--paper);
+      color: var(--ink-mid);
+      padding: 0.2rem 0.8rem;
+      border-radius: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .character-details p {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* 故事軸排列 */
+    .story-chapters {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .story-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .story-row.reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    .story-content h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.6rem;
+      color: var(--bark);
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .story-content h3 span {
+      display: block;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--terra);
+      margin-bottom: 0.2rem;
+    }
+    .story-content p {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      text-align: justify;
+    }
+    .story-img-wrapper {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(61,43,26,0.06);
+    }
+    .story-img-wrapper img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .story-img-wrapper:hover img {
+      transform: scale(1.05);
+    }
 
     /* ── INTERACTION BANNER ── */
     .interaction-banner {
@@ -168,6 +274,10 @@
       .hero-right { padding: 2rem; order: 1; }
       .hero-title { font-size: 2.5rem; }
       .products-grid { grid-template-columns: 1fr; }
+      .characters-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .character-card { flex-direction: column; text-align: center; padding: 2rem; }
+      .story-row, .story-row.reverse { grid-template-columns: 1fr; gap: 2rem; }
+      .story-row .story-img-wrapper { order: -1; } /* 讓圖片在手機版排在文字上方 */
       .banner-btns { flex-direction: column; align-items: center; }
       .nav-links { display: none; }
       .floating-line { bottom: 20px; right: 20px; width: 50px; height: 50px; }
@@ -188,6 +298,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#products">天然手作</a></li>
+    <li><a href="#story">品牌故事</a></li>
     <li><a href="#about">關於我們</a></li>
     <li><a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="nav-cta">填表訂購</a></li>
   </ul>
@@ -196,10 +307,10 @@
 <section class="hero">
   <div class="hero-left">
     <p class="hero-tagline">每一次嚼食，都是一次愛的對話</p>
-    <h1 class="hero-title">給予最 <em>溫暖</em> 的<br>台灣在地滋味</h1>
+    <h1 class="hero-title">給予最 <em>溫暖</em> 的<br>在地天然滋味</h1>
     <p class="hero-desc">
       我們相信，零嘴不只是食物，更是人與毛孩之間最親密的連結。
-      選用 CAS 認證台灣豬，用熱風乾燥鎖住每一份純粹。
+      嚴選在地新鮮食材與優質肉品，用低溫烘焙鎖住每一份純粹。
     </p>
     <div class="hero-btns">
       <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">立即預約新鮮手作</a>
@@ -207,11 +318,13 @@
   </div>
   <div class="hero-right">
     <div class="hero-img-box">
-      <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=800&q=80" alt="與毛孩的暖心互動">
+      <!-- 使用 Paludo 在台灣老街的真實暖心照片 -->
+      <img src="kuro_shiba_taiwan_alley.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=800&q=80';" alt="Paludo 在台灣老街散步的帥氣身影">
     </div>
   </div>
 </section>
 
+<!-- 產品區塊 -->
 <section id="products" class="container">
   <div class="section-head">
     <span class="title-deco">Pure & Natural</span>
@@ -221,20 +334,20 @@
   <div class="products-grid">
     <!-- 產品 1 -->
     <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="尾冬骨">
+      <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" class="product-img" alt="貓草雞肉薄片">
       <div class="product-info">
-        <p class="product-meta">安靜的啃咬時光</p>
-        <h3 class="product-name">台灣豬尾冬骨</h3>
+        <p class="product-meta">貓咪狗狗的療癒草本風</p>
+        <h3 class="product-name">貓草雞肉薄片</h3>
         <p class="product-desc">
-          豐厚的骨肉層次，適合在慵懶的午後交給毛孩。看著牠專注地啃咬，是忙碌生活中最療癒的靜謐時刻。
+          精選國產新鮮雞胸肉，拌入優質天然貓草，經過低溫慢烘收乾。香氣濃郁，香脆好咬，不僅是貓咪瘋狂的最愛，狗狗也一嚼傾心。
         </p>
-        <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">選購尾冬骨</a>
+        <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">選購雞肉薄片</a>
       </div>
     </div>
 
     <!-- 產品 2 -->
     <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=600&q=80" class="product-img" alt="豬耳多">
+      <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" class="product-img" alt="低溫烘焙豬耳多">
       <div class="product-info">
         <p class="product-meta">脆口的驚喜獎勵</p>
         <h3 class="product-name">低溫烘焙豬耳多</h3>
@@ -247,10 +360,81 @@
   </div>
 </section>
 
+<!-- 品牌故事區塊 -->
+<section id="story" class="story-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="title-deco">Our Story</span>
+      <h2 class="section-title">陽光下的咔滋圓舞曲</h2>
+      <p style="color: var(--ink-mid); font-size: 0.95rem; margin-top: 0.5rem;">在飄散烤箱餘溫的烘焙廚房，生活著兩個性格迥異卻無比和諧的靈魂。</p>
+    </div>
+
+    <!-- 主角介紹卡片 -->
+    <div class="characters-grid">
+      <div class="character-card">
+        <!-- Paludo 照片連結至上傳的黑柴檔案 -->
+        <img src="kuro_shiba_taiwan_alley.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=300&q=80';" alt="黑柴 Paludo" class="character-avatar">
+        <div class="character-details">
+          <h3>Paludo</h3>
+          <span class="tag">黑柴 (Kuro Shiba)</span>
+          <p>擁有一身帥氣烏黑亮麗的毛髮，胸前襯著醒目的白色V字胸領，兩頰帶有溫暖的奶油胡麻色。最喜歡在充滿古樸仙草香的台灣老街巷弄裡帥氣漫步，熱愛風的氣味、老街的陽光，以及每一次烤箱響起的美味訊號！</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80" alt="英短 Mila" class="character-avatar">
+        <div class="character-details">
+          <h3>Mila</h3>
+          <span class="tag">英國短毛貓 (British Shorthair)</span>
+          <p>優雅安靜的藍灰貓咪，擁有一雙明亮的琥珀色大眼睛。最喜歡在窗台享受午後日光，雖然常覺得 Paludo 傻氣，卻最愛貼著牠一塊睡覺。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 故事繪本牆 -->
+    <div class="story-chapters">
+      
+      <!-- 篇章 1 -->
+      <div class="story-row">
+        <div class="story-content">
+          <h3><span>Chapter 01</span>廚房裡的香氣魔法</h3>
+          <p>午後兩點，是屋子裡最靜謐溫馨的時刻。隨著低溫烘焙機緩緩運作，淡淡而純粹的肉香在空氣中漫延。原本在客廳沙發打盹的 Paludo 會瞬間睜開眼睛，抖抖那一身帥氣的黑亮毛髮，踏著輕快的「嗒嗒」腳步坐鎮在廚房門口；而假寐的 Mila 則會輕盈跳下窗台，像一朵灰色的雲朵般優雅靠攏。牠們都在期待今天新鮮手作的出爐時分。</p>
+        </div>
+        <div class="story-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80" alt="廚房裡的烘焙暖光">
+        </div>
+      </div>
+
+      <!-- 篇章 2 -->
+      <div class="story-row reverse">
+        <div class="story-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=600&q=80" alt="專注咬咬的療癒時刻">
+        </div>
+        <div class="story-content">
+          <h3><span>Chapter 02</span>專注的療癒時光</h3>
+          <p>當溫熱金黃的「低溫烘焙豬耳多」遞到 Paludo 面前，牠便會用爪子按住，專注而神聖地啃咬起來。「咔滋、咔滋……」那種酥脆清爽的碎裂聲，不僅讓牠平靜下來，也彷彿洗滌了忙碌生活中的浮躁。一旁靜靜看著的 Mila，尾巴偶爾微微勾起，也感受到了這份單純而療癒的快樂。</p>
+        </div>
+      </div>
+
+      <!-- 篇章 3 -->
+      <div class="story-row">
+        <div class="story-content">
+          <h3><span>Chapter 03</span>貓草的草本魔法</h3>
+          <p>「好啦，也有妳的。」當微甜芬芳的「貓草雞肉薄片」放在 Mila 面前時，天然草本與鮮甜雞肉的雙重香氣讓牠驚喜得瞳孔放大。細細咬下那酥脆的薄片，喉嚨裡泛起一陣滿足的「嚕嚕」聲。這是屬於 Mila 與 Paludo 在午後的小確幸，連空氣也跟著變得溫柔放鬆。</p>
+        </div>
+        <div class="story-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1513360309081-36f5e878fc9e?auto=format&fit=crop&w=600&q=80" alt="貓咪與草本美味">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 關於我們 & BANNER -->
 <section class="container" id="about">
   <div class="interaction-banner">
     <h2>「牠不懂什麼是成分，但牠懂什麼是愛。」</h2>
-    <p>Paludo & Mila 從自家廚房出發，堅持不添加人工香料與防腐劑，只為了給家人最安心的那一口。我們透過 Google 表單接單生產，確保每一份零嘴都維持最高的新鮮度。</p>
+    <p>Paludo & Mila 從自家廚房出發，堅持不添加人工香料與防腐劑，只為了給家人最安心的那一口。我們透過 Google 表單接單生產，確保每一份零嘴都維持最高的新鮮度與手感溫度。</p>
     <div class="banner-btns">
       <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn" style="background: white; color: var(--moss);">填寫訂購單</a>
       <a href="https://line.me/ti/p/你的LINE連結" target="_blank" class="btn btn-line">
@@ -262,7 +446,7 @@
 
 <footer>
   <div class="footer-logo">Paludo <span>&</span> Mila</div>
-  <p style="margin-bottom: 1.5rem; color: var(--ink-mid);">台灣在地．天然純粹．愛在齒間</p>
+  <p style="margin-bottom: 1.5rem; color: var(--ink-mid);">在地天然．純粹手作．愛在齒間</p>
   <ul class="footer-links">
     <li><a href="#products">產品目錄</a></li>
     <li><a href="https://line.me/ti/p/你的LINE連結">聯繫客服</a></li>
@@ -287,7 +471,8 @@
     });
   }, observerOptions);
 
-  document.querySelectorAll('.product-card, .interaction-banner').forEach(el => {
+  // 註冊所有在視窗滾動時需要顯現的區塊與元素
+  document.querySelectorAll('.product-card, .character-card, .story-row, .interaction-banner').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(40px)';
     el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
