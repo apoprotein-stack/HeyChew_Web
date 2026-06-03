@@ -1,484 +1,1355 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paludo & Mila｜天然手作寵物零嘴 溫暖相伴每一刻</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,700;1,400&family=Noto+Serif+TC:wght=400;500;600&family=Noto+Sans+TC:wght=300;400;500&family=Caveat:wght=400;600&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --kraft:     #c8a97a;
-      --kraft-dk:  #a07c50;
-      --kraft-lt:  #e8d5b0;
-      --cream:     #faf6ee;
-      --warm:      #f5ede0;
-      --paper:     #f0e6d3;
-      --terra:     #c4623a;
-      --terra-lt:  #e8896a;
-      --moss:      #5a7a52;
-      --moss-lt:   #8aaa82;
-      --bark:      #3d2b1a;
-      --ink:       #2c1f0e;
-      --ink-mid:   #5a4030;
-      --line-green:#06C755;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      overflow-x: hidden;
-      line-height: 1.8;
-    }
-
-    /* 紙張紋理疊加 */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 3rem;
-      background: rgba(250, 246, 238, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(200,169,122,0.1);
-    }
-    .nav-logo { text-decoration: none; display: flex; flex-direction: column; }
-    .nav-logo-main {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; font-weight: 700; color: var(--bark);
-    }
-    .nav-logo-main span { color: var(--terra); }
-    .nav-logo-sub { font-family: 'Caveat', cursive; font-size: 0.8rem; color: var(--ink-mid); }
-    
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { font-size: 0.85rem; color: var(--ink-mid); text-decoration: none; transition: 0.2s; }
-    .nav-links a:hover { color: var(--terra); }
-    .nav-cta {
-      background: var(--terra); color: white !important;
-      padding: 0.5rem 1.5rem; border-radius: 2rem;
-      font-weight: 500;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 95vh; display: grid; grid-template-columns: 1.1fr 0.9fr;
-      padding-top: 5rem; align-items: center;
-    }
-    .hero-left { padding: 0 5% 0 10%; }
-    .hero-tagline { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--moss); margin-bottom: 1rem; }
-    .hero-title {
-      font-family: 'Noto Serif TC', serif; font-size: 3.5rem; font-weight: 600;
-      line-height: 1.3; color: var(--bark); margin-bottom: 1.5rem;
-    }
-    .hero-title em { font-style: normal; color: var(--terra); position: relative; }
-    .hero-title em::after {
-      content: ''; position: absolute; bottom: 8px; left: 0; width: 100%;
-      height: 10px; background: rgba(196, 98, 58, 0.1); z-index: -1;
-    }
-    .hero-desc { font-size: 1rem; color: var(--ink-mid); margin-bottom: 2.5rem; max-width: 28rem; }
-    
-    .hero-right { position: relative; padding-right: 10%; }
-    .hero-img-box {
-      border-radius: 2rem 2rem 10rem 2rem;
-      overflow: hidden; box-shadow: 20px 30px 60px rgba(61,43,26,0.08);
-      transform: rotate(0.5deg);
-    }
-    .hero-img-box img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/5; }
-
-    /* ── SECTION COMMONS ── */
-    section { padding: 6rem 0; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-    .section-head { text-align: center; margin-bottom: 4rem; }
-    .section-title { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; color: var(--bark); }
-    .title-deco { color: var(--terra); font-family: 'Caveat', cursive; font-size: 1.4rem; display: block; margin-bottom: 0.5rem; }
-
-    /* ── PRODUCTS ── */
-    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .product-card {
-      background: white; border-radius: 2.5rem; overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      box-shadow: 0 15px 35px rgba(61,43,26,0.04);
-    }
-    .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(61,43,26,0.08); }
-    .product-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform 0.6s ease; }
-    .product-card:hover .product-img { transform: scale(1.03); }
-    .product-info { padding: 2.5rem; }
-    .product-meta { font-family: 'Caveat', cursive; color: var(--moss); font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .product-name { font-family: 'Noto Serif TC', serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--bark); }
-    .product-desc { font-size: 0.95rem; color: var(--ink-mid); margin-bottom: 2rem; min-height: 4.5rem; }
-    
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.8rem 2.2rem; border-radius: 3rem;
-      text-decoration: none; font-size: 0.9rem; transition: 0.3s;
-      cursor: pointer; border: none; font-weight: 500;
-    }
-    .btn-terra { background: var(--terra); color: white; }
-    .btn-terra:hover { background: var(--terra-lt); transform: scale(1.05); }
-    
-    .btn-line { background: var(--line-green); color: white; gap: 0.5rem; }
-    .btn-line:hover { opacity: 0.9; transform: scale(1.05); }
-
-    /* ── BRAND STORY SECTION ── */
-    .story-section {
-      background: linear-gradient(to bottom, var(--cream), var(--warm), var(--cream));
-      border-radius: 4rem;
-      padding: 6rem 0;
-      margin: 4rem 0;
-    }
-    /* 主角介紹卡片 */
-    .characters-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 5rem;
-    }
-    .character-card {
-      background: white;
-      border: 1px solid rgba(200,169,122,0.15);
-      border-radius: 2rem;
-      padding: 2.5rem;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(61,43,26,0.03);
-    }
-    .character-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--paper);
-    }
-    .character-details h3 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 1.4rem;
-      color: var(--bark);
-      margin-bottom: 0.5rem;
-    }
-    .character-details .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      background: var(--paper);
-      color: var(--ink-mid);
-      padding: 0.2rem 0.8rem;
-      border-radius: 1rem;
-      margin-bottom: 0.8rem;
-    }
-    .character-details p {
-      font-size: 0.85rem;
-      color: var(--ink-mid);
-      line-height: 1.6;
-    }
-
-    /* 故事軸排列 */
-    .story-chapters {
-      display: flex;
-      flex-direction: column;
-      gap: 5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .story-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .story-row.reverse {
-      grid-template-columns: 1fr 1.2fr;
-    }
-    .story-content h3 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 1.6rem;
-      color: var(--bark);
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
-    .story-content h3 span {
-      display: block;
-      font-family: 'Caveat', cursive;
-      font-size: 1.2rem;
-      color: var(--terra);
-      margin-bottom: 0.2rem;
-    }
-    .story-content p {
-      font-size: 0.95rem;
-      color: var(--ink-mid);
-      line-height: 1.8;
-      text-align: justify;
-    }
-    .story-img-wrapper {
-      position: relative;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(61,43,26,0.06);
-    }
-    .story-img-wrapper img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s;
-    }
-    .story-img-wrapper:hover img {
-      transform: scale(1.05);
-    }
-
-    /* ── INTERACTION BANNER ── */
-    .interaction-banner {
-      background: var(--moss); color: var(--cream); text-align: center; padding: 6rem 2rem;
-      border-radius: 4rem; margin: 4rem 2rem; position: relative; overflow: hidden;
-    }
-    .interaction-banner::before {
-      content: 'Pure Love'; position: absolute; top: -20px; left: -20px;
-      font-family: 'Caveat', cursive; font-size: 8rem; opacity: 0.05; transform: rotate(-15deg);
-    }
-    .interaction-banner h2 { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; margin-bottom: 1.5rem; }
-    .interaction-banner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-    .banner-btns { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-
-    /* ── FLOATING BUTTON ── */
-    .floating-line {
-      position: fixed; bottom: 30px; right: 30px; z-index: 99;
-      width: 60px; height: 60px; background: var(--line-green);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 25px rgba(6,199,85,0.3);
-      transition: 0.3s;
-    }
-    .floating-line:hover { transform: scale(1.1) rotate(5deg); }
-    .floating-line svg { width: 32px; height: 32px; fill: white; }
-
-    /* ── FOOTER ── */
-    footer { text-align: center; padding: 5rem 0; background: var(--warm); border-radius: 5rem 5rem 0 0; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; color: var(--bark); }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; list-style: none; font-size: 0.85rem; }
-    .footer-links a { color: var(--ink-mid); text-decoration: none; opacity: 0.8; }
-    .footer-copy { font-size: 0.8rem; color: var(--ink-mid); opacity: 0.5; letter-spacing: 1px; }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; min-height: auto; }
-      .hero-left { padding: 0 2rem; order: 2; }
-      .hero-right { padding: 2rem; order: 1; }
-      .hero-title { font-size: 2.5rem; }
-      .products-grid { grid-template-columns: 1fr; }
-      .characters-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .character-card { flex-direction: column; text-align: center; padding: 2rem; }
-      .story-row, .story-row.reverse { grid-template-columns: 1fr; gap: 2rem; }
-      .story-row .story-img-wrapper { order: -1; } /* 讓圖片在手機版排在文字上方 */
-      .banner-btns { flex-direction: column; align-items: center; }
-      .nav-links { display: none; }
-      .floating-line { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嗨嚼 - 頂級寵物保養美學官網</title>
+    <!-- 引入 Tailwind CSS 確保極致優雅的 UI 設計 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#dfa290',   /* 溫暖品牌粉橘色 */
+                            light: '#fbf7f5',     /* 極柔和背景沙色 */
+                            dark: '#936b5c',      /* 雅緻深褐色 */
+                            text: '#4a423e',      /* 質感炭黑色 */
+                            muted: '#8a7e78',     /* 灰褐色說明字 */
+                            border: '#f0eae6',    /* 溫和邊框色 */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #fbf7f5;
+            color: #4a423e;
+        }
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 隱藏滾動條但保持功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
-<body>
+<body class="font-sans antialiased min-h-screen flex flex-col">
 
-<!-- 浮動 LINE 按鈕 (請記得替換你的 LINE ID 連結) -->
-<a href="https://line.me/ti/p/你的LINE連結" target="_blank" class="floating-line" title="立即諮詢">
-  <svg viewBox="0 0 24 24"><path d="M22.285 9.356c-.039-4.531-4.12-8.176-8.995-8.176-4.865 0-8.824 3.536-8.824 7.883 0 2.596 1.422 4.846 3.591 6.3l-.847 2.42c-.027.076.012.158.089.183a.152.152 0 0 0 .102-.001l2.902-1.394c.54.105 1.091.158 1.654.158 4.865 0 8.824-3.536 8.824-7.883-.173-.414-.347-.797-.496-1.49zm-13.882 1.34c-.382 0-.693-.311-.693-.693 0-.382.311-.693.693-.693.382 0 .693.311.693.693 0 .382-.311.693-.693.693zm3.176 0c-.382 0-.693-.311-.693-.693 0-.382.311-.693.693-.693.382 0 .693.311.693.693 0 .382-.311.693-.693.693zm3.176 0c-.382 0-.693-.311-.693-.693 0-.382.311-.693.693-.693.382 0 .693.311.693.693 0 .382-.311.693-.693.693z"/></svg>
-</a>
-
-<nav>
-  <a class="nav-logo" href="#">
-    <span class="nav-logo-main">Paludo <span>&</span> Mila</span>
-    <span class="nav-logo-sub">人寵互動的純粹美味</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#products">天然手作</a></li>
-    <li><a href="#story">品牌故事</a></li>
-    <li><a href="#about">關於我們</a></li>
-    <li><a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="nav-cta">填表訂購</a></li>
-  </ul>
-</nav>
-
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-tagline">每一次嚼食，都是一次愛的對話</p>
-    <h1 class="hero-title">給予最 <em>溫暖</em> 的<br>在地天然滋味</h1>
-    <p class="hero-desc">
-      我們相信，零嘴不只是食物，更是人與毛孩之間最親密的連結。
-      嚴選在地新鮮食材與優質肉品，用低溫烘焙鎖住每一份純粹。
-    </p>
-    <div class="hero-btns">
-      <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">立即預約新鮮手作</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-img-box">
-      <!-- 使用 Paludo 在台灣老街的真實暖心照片 -->
-      <img src="kuro_shiba_taiwan_alley.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=800&q=80';" alt="Paludo 在台灣老街散步的帥氣身影">
-    </div>
-  </div>
-</section>
-
-<!-- 產品區塊 -->
-<section id="products" class="container">
-  <div class="section-head">
-    <span class="title-deco">Pure & Natural</span>
-    <h2 class="section-title">兩款經典，一樣的陪伴</h2>
-  </div>
-  
-  <div class="products-grid">
-    <!-- 產品 1 -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" class="product-img" alt="貓草雞肉薄片">
-      <div class="product-info">
-        <p class="product-meta">貓咪狗狗的療癒草本風</p>
-        <h3 class="product-name">貓草雞肉薄片</h3>
-        <p class="product-desc">
-          精選國產新鮮雞胸肉，拌入優質天然貓草，經過低溫慢烘收乾。香氣濃郁，香脆好咬，不僅是貓咪瘋狂的最愛，狗狗也一嚼傾心。
-        </p>
-        <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">選購雞肉薄片</a>
-      </div>
+    <!-- 頂部動態通知 Toast (取代瀏覽器預設 alert) -->
+    <div id="toast" class="fixed top-6 right-6 z-[2000] transform -translate-y-24 opacity-0 transition-all duration-300 ease-out bg-brand-dark text-white px-6 py-4 rounded-xl shadow-xl flex items-center gap-3">
+        <span id="toast-icon">✨</span>
+        <span id="toast-text" class="font-medium tracking-wide">商品已成功加入購物車</span>
     </div>
 
-    <!-- 產品 2 -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" class="product-img" alt="低溫烘焙豬耳多">
-      <div class="product-info">
-        <p class="product-meta">脆口的驚喜獎勵</p>
-        <h3 class="product-name">低溫烘焙豬耳多</h3>
-        <p class="product-desc">
-          極致酥脆的口感，是互動遊戲後最好的獎勵。聽著那清脆的「咔滋」聲，感受牠對你的滿滿愛意。
-        </p>
-        <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn btn-terra">選購豬耳多</a>
-      </div>
+    <!-- 導覽列 -->
+    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md z-[999] border-b border-brand-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- 品牌 LOGO -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('home')">
+                <span class="text-xl sm:text-2xl font-bold tracking-widest text-brand-dark">嗨嚼</span>
+                <span class="hidden sm:inline-block h-4 w-[1px] bg-brand-primary"></span>
+                <span class="hidden sm:inline-block text-xs font-light tracking-widest text-brand-muted uppercase">Pet Beauty</span>
+            </div>
+
+            <!-- 桌上型電腦選單 (內含下拉選單) -->
+            <nav class="hidden md:flex items-center gap-8">
+                <div class="relative group">
+                    <button class="text-sm font-medium tracking-wider text-brand-text hover:text-brand-primary py-2 flex items-center gap-1" onclick="switchPage('home')">
+                        首頁
+                    </button>
+                </div>
+                
+                <div class="relative group">
+                    <button class="text-sm font-medium tracking-wider text-brand-text hover:text-brand-primary py-2 flex items-center gap-1" onclick="switchPage('about')">
+                        品牌故事
+                    </button>
+                </div>
+
+                <!-- 精選商品（具備下拉選單 Dropdown） -->
+                <div class="relative group">
+                    <button class="text-sm font-medium tracking-wider text-brand-text hover:text-brand-primary py-2 flex items-center gap-1" onclick="switchPage('shop')">
+                        所有商品 <span class="text-[10px] text-brand-muted group-hover:rotate-180 transition-transform duration-300">▼</span>
+                    </button>
+                    <!-- 下拉選單面板 -->
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full w-48 bg-white border border-brand-border rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[1000]">
+                        <a onclick="switchPage('shop', 'cat')" class="block px-5 py-3 text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer text-center">🐱 貓咪專區</a>
+                        <a onclick="switchPage('shop', 'dog')" class="block px-5 py-3 text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer text-center">🐶 狗狗專區</a>
+                        <a onclick="switchPage('shop', 'treats')" class="block px-5 py-3 text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer text-center">🥩 凍乾肉乾</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button class="text-sm font-medium tracking-wider text-brand-text hover:text-brand-primary py-2 flex items-center gap-1" onclick="switchPage('contact')">
+                        聯絡我們
+                    </button>
+                </div>
+            </nav>
+
+            <!-- 右側控制按鈕 (購物車 & 行動版漢堡選單) -->
+            <div class="flex items-center gap-4">
+                <!-- 購物車按鈕 -->
+                <button class="relative p-2.5 hover:bg-brand-light rounded-full transition-colors duration-200" onclick="toggleCart(true)">
+                    <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                    <!-- 購物車件數標記 -->
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-primary text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+
+                <!-- 行動裝置漢堡選單按鈕 -->
+                <button class="md:hidden p-2 hover:bg-brand-light rounded-lg transition-colors" onclick="toggleMobileDrawer(true)">
+                    <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- 行動裝置側邊抽屜導覽 (Mobile Drawer) -->
+    <div id="mobile-drawer-overlay" class="fixed inset-0 bg-brand-text/40 backdrop-blur-sm z-[1001] opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleMobileDrawer(false)"></div>
+    <div id="mobile-drawer" class="fixed top-0 -left-80 w-72 h-full bg-white z-[1002] shadow-2xl p-6 transition-all duration-300 flex flex-col justify-between">
+        <div>
+            <div class="flex items-center justify-between pb-6 border-b border-brand-border">
+                <span class="text-lg font-bold text-brand-dark tracking-wider">選單導覽</span>
+                <button class="p-2 hover:bg-brand-light rounded-full" onclick="toggleMobileDrawer(false)">
+                    <svg class="w-5 h-5 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="mt-6 flex flex-col gap-4">
+                <a onclick="switchPage('home'); toggleMobileDrawer(false);" class="py-3 px-4 rounded-xl text-brand-text hover:bg-brand-light hover:text-brand-primary font-medium cursor-pointer transition-all">🏠 首頁</a>
+                <a onclick="switchPage('about'); toggleMobileDrawer(false);" class="py-3 px-4 rounded-xl text-brand-text hover:bg-brand-light hover:text-brand-primary font-medium cursor-pointer transition-all">📖 品牌故事</a>
+                
+                <div class="border-t border-brand-border/60 my-2"></div>
+                <span class="px-4 text-xs font-bold text-brand-muted tracking-widest uppercase">商品分類</span>
+                <a onclick="switchPage('shop', 'all'); toggleMobileDrawer(false);" class="py-2 px-6 rounded-xl text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer transition-all">• 顯示全部</a>
+                <a onclick="switchPage('shop', 'cat'); toggleMobileDrawer(false);" class="py-2 px-6 rounded-xl text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer transition-all">• 貓咪專區</a>
+                <a onclick="switchPage('shop', 'dog'); toggleMobileDrawer(false);" class="py-2 px-6 rounded-xl text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer transition-all">• 狗狗專區</a>
+                <a onclick="switchPage('shop', 'treats'); toggleMobileDrawer(false);" class="py-2 px-6 rounded-xl text-sm text-brand-text hover:bg-brand-light hover:text-brand-primary cursor-pointer transition-all">• 凍乾肉乾</a>
+                <div class="border-t border-brand-border/60 my-2"></div>
+
+                <a onclick="switchPage('contact'); toggleMobileDrawer(false);" class="py-3 px-4 rounded-xl text-brand-text hover:bg-brand-light hover:text-brand-primary font-medium cursor-pointer transition-all">✉️ 聯絡我們</a>
+            </nav>
+        </div>
+        <div class="text-center text-xs text-brand-muted border-t border-brand-border pt-4">
+            © 2026 愛你嚼生技有限公司
+        </div>
     </div>
-  </div>
-</section>
 
-<!-- 品牌故事區塊 -->
-<section id="story" class="story-section">
-  <div class="container">
-    <div class="section-head">
-      <span class="title-deco">Our Story</span>
-      <h2 class="section-title">陽光下的咔滋圓舞曲</h2>
-      <p style="color: var(--ink-mid); font-size: 0.95rem; margin-top: 0.5rem;">在飄散烤箱餘溫的烘焙廚房，生活著兩個性格迥異卻無比和諧的靈魂。</p>
+
+    <!-- ================= 頁面：首頁 (HOME) ================= -->
+    <main id="page-home" class="page-section active flex-grow pt-20">
+        <!-- 輪播 Banner (自動與手動點選) -->
+        <section class="relative h-[480px] sm:h-[600px] overflow-hidden bg-brand-light">
+            <div id="slides-container" class="h-full w-full relative">
+                <!-- 投影片 1 -->
+                <div class="slide absolute inset-0 opacity-100 transition-all duration-1000 ease-in-out flex items-center bg-gradient-to-r from-[#f5eae4] to-[#fbf7f5]">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-6 text-center md:text-left z-10">
+                            <span class="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-semibold tracking-widest rounded-full">NATURAL & COMPASSIONATE</span>
+                            <h1 class="text-3xl sm:text-5xl font-bold tracking-wider text-brand-dark leading-tight">純粹，給牠最溫柔的守護</h1>
+                            <p class="text-base sm:text-lg text-brand-muted max-w-md">精選天然草本與植萃複方，回歸毛孩最自然健康的日常陪伴與深層呵護。</p>
+                            <button onclick="switchPage('shop')" class="inline-block px-8 py-3.5 bg-brand-dark hover:bg-brand-primary text-white rounded-full font-medium tracking-wider shadow-lg shadow-brand-dark/10 hover:shadow-brand-primary/20 transform hover:-translate-y-0.5 transition-all duration-300">
+                                立即探索商品
+                            </button>
+                        </div>
+                        <!-- 右側大圖框 1 (代號 p-hero1) -->
+                        <div class="hidden md:flex justify-center select-none z-10">
+                            <div class="w-80 h-80 bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] border-2 border-dashed border-brand-primary/40 rounded-3xl flex flex-col items-center justify-center shadow-xl border-4 border-white transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <span class="text-4xl font-extrabold text-brand-dark tracking-wider">p-hero1</span>
+                                <span class="text-[10px] text-brand-muted tracking-widest font-mono uppercase mt-2">HERO BANNER 1 (500x500)</span>
+                                <span class="text-3xl mt-2">🌱</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 投影片 2 -->
+                <div class="slide absolute inset-0 opacity-0 transition-all duration-1000 ease-in-out flex items-center bg-gradient-to-r from-[#eaf1ed] to-[#fbf7f5]">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-6 text-center md:text-left z-10">
+                            <span class="inline-block px-3 py-1 bg-emerald-600/10 text-emerald-600 text-xs font-semibold tracking-widest rounded-full">VETERINARY FORMULATED</span>
+                            <h1 class="text-3xl sm:text-5xl font-bold tracking-wider text-brand-dark leading-tight">守護毛孩亮麗的日常</h1>
+                            <p class="text-base sm:text-lg text-brand-muted max-w-md">專為亞洲多雨潮濕氣候設計，低敏溫和配方，打造健康的肌膚皮毛防護罩。</p>
+                            <button onclick="switchPage('shop', 'treats')" class="inline-block px-8 py-3.5 bg-brand-dark hover:bg-brand-primary text-white rounded-full font-medium tracking-wider shadow-lg shadow-brand-dark/10 hover:shadow-brand-primary/20 transform hover:-translate-y-0.5 transition-all duration-300">
+                                了解美味凍乾
+                            </button>
+                        </div>
+                        <!-- 右側大圖框 2 (代號 p-hero2) -->
+                        <div class="hidden md:flex justify-center select-none z-10">
+                            <div class="w-80 h-80 bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] border-2 border-dashed border-brand-primary/40 rounded-3xl flex flex-col items-center justify-center shadow-xl border-4 border-white transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <span class="text-4xl font-extrabold text-brand-dark tracking-wider">p-hero2</span>
+                                <span class="text-[10px] text-brand-muted tracking-widest font-mono uppercase mt-2">HERO BANNER 2 (500x500)</span>
+                                <span class="text-3xl mt-2">🧪</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 投影片 3 -->
+                <div class="slide absolute inset-0 opacity-0 transition-all duration-1000 ease-in-out flex items-center bg-gradient-to-r from-[#ebd9d5] to-[#fbf7f5]">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-6 text-center md:text-left z-10">
+                            <span class="inline-block px-3 py-1 bg-amber-600/10 text-amber-700 text-xs font-semibold tracking-widest rounded-full">100% NATURAL FRESH TREATS</span>
+                            <h1 class="text-3xl sm:text-5xl font-bold tracking-wider text-brand-dark leading-tight">愛你嚼生技 原肉極品磨牙</h1>
+                            <p class="text-base sm:text-lg text-brand-muted max-w-md">嚴選最頂級在地食材與低溫慢烘工藝，守護毛孩越嚼越快樂的健康好滋味。</p>
+                            <button onclick="switchPage('shop', 'all')" class="inline-block px-8 py-3.5 bg-brand-dark hover:bg-brand-primary text-white rounded-full font-medium tracking-wider shadow-lg shadow-brand-dark/10 hover:shadow-brand-primary/20 transform hover:-translate-y-0.5 transition-all duration-300">
+                                前往新品專區
+                            </button>
+                        </div>
+                        <!-- 右側大圖框 3 (代號 p-hero3) -->
+                        <div class="hidden md:flex justify-center select-none z-10">
+                            <div class="w-80 h-80 bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] border-2 border-dashed border-brand-primary/40 rounded-3xl flex flex-col items-center justify-center shadow-xl border-4 border-white transform rotate-6 hover:rotate-0 transition-transform duration-500">
+                                <span class="text-4xl font-extrabold text-brand-dark tracking-wider">p-hero3</span>
+                                <span class="text-[10px] text-brand-muted tracking-widest font-mono uppercase mt-2">HERO BANNER 3 (500x500)</span>
+                                <span class="text-3xl mt-2">🍖</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 輪播控制點 -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+                <button class="slide-dot w-10 h-1.5 rounded-full bg-brand-dark transition-all duration-300" onclick="setSlide(0)"></button>
+                <button class="slide-dot w-3 h-1.5 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300" onclick="setSlide(1)"></button>
+                <button class="slide-dot w-3 h-1.5 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300" onclick="setSlide(2)"></button>
+            </div>
+        </section>
+
+        <!-- 品牌亮點區塊 -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-primary text-xs font-semibold tracking-widest uppercase">Our Philosophy</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-wider text-brand-dark mt-2 mb-4">我們對極致純淨的追求</h2>
+                <div class="w-12 h-0.5 bg-brand-primary mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 border border-brand-border shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-center">
+                    <span class="text-4xl mb-6 block select-none">🌱</span>
+                    <h3 class="text-lg font-bold text-brand-dark mb-3">100% 天然純淨原肉</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">嚴選優質在地食材與新鮮肉品，堅持低溫慢烘，鎖住完整營養，給毛孩無負擔的純粹享受。</p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 border border-brand-border shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-center">
+                    <span class="text-4xl mb-6 block select-none">🥩</span>
+                    <h3 class="text-lg font-bold text-brand-dark mb-3">低溫烘焙/真空凍乾</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">採用高規格先進低溫脫水與冷凍乾燥技術，保留食材最鮮甜原始風味與天然活性微量元素。</p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 border border-brand-border shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-center">
+                    <span class="text-4xl mb-6 block select-none">🛡️</span>
+                    <h3 class="text-lg font-bold text-brand-dark mb-3">無人工有害添加物</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">保證不含防腐劑、防腐香料、著色劑及高鈉調味。回歸最健康安心、最貼近毛孩天性的日常陪伴。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= 頁面：關於我們 (ABOUT) ================= -->
+    <main id="page-about" class="page-section flex-grow pt-20">
+        <!-- 頁面 Banner -->
+        <section class="bg-[#f2e6e1] py-16 sm:py-24 text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-widest text-brand-dark mb-4">關於 嗨嚼</h1>
+                <p class="text-sm sm:text-base text-brand-muted tracking-wider">與自然共生，用愛寫下每一天的極致保養與美味篇章</p>
+            </div>
+        </section>
+
+        <!-- 故事內文 -->
+        <section class="max-w-4xl mx-auto px-4 py-16 sm:py-24 space-y-12 leading-relaxed text-brand-text">
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-brand-dark tracking-wide">源自一份最純粹的溫柔承諾</h3>
+                <p class="text-base">
+                    「嗨嚼」的誕生，起初源自於創辦人對家中敏感毛孩的關愛。市面上充斥著加工過度、添加大量人工香料與化學防腐劑的寵物食品，常常帶給毛孩未知的身體負擔。
+                </p>
+                <p class="text-base">
+                    「我們不能給心愛的毛孩更安全、更天然健康的原肉美味嗎？」帶著這樣的決心，我們開始研發高規格原肉慢烘與冷凍乾燥技術，堅持成分完全透明公開，只留下最新鮮的營養養分。
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 sm:p-10 border border-brand-border shadow-sm">
+                <h3 class="text-xl font-bold text-brand-dark mb-4">守護生命與環境永續</h3>
+                <p class="text-sm sm:text-base text-brand-muted leading-loose">
+                    我們深信，毛孩是我們最親密的家人。因此，「愛你嚼生技有限公司」旗下所有產品在開發過程中拒絕一切不妥協的添加，同時包裝儘量選用對大地溫和、可循環利用的材質。給毛孩最好的防護，也是我們對環境永續的愛護。
+                </p>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= 頁面：所有商品 (SHOP) ================= -->
+    <main id="page-shop" class="page-section flex-grow pt-20">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <span class="text-brand-primary text-xs font-semibold tracking-widest uppercase">Shop List</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-wider text-brand-dark mt-2 mb-4">探索優質美味護理</h2>
+                <div class="w-12 h-0.5 bg-brand-primary mx-auto"></div>
+            </div>
+
+            <!-- 商品分類篩選按鈕列 -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+                <button id="btn-filter-all" onclick="filterProducts('all')" class="px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-brand-dark text-white shadow-sm border border-brand-dark transition-all duration-300">顯示全部</button>
+                <button id="btn-filter-cat" onclick="filterProducts('cat')" class="px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-white text-brand-text hover:bg-brand-light border border-brand-border transition-all duration-300">🐱 貓咪專區</button>
+                <button id="btn-filter-dog" onclick="filterProducts('dog')" class="px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-white text-brand-text hover:bg-brand-light border border-brand-border transition-all duration-300">🐶 狗狗專區</button>
+                <button id="btn-filter-treats" onclick="filterProducts('treats')" class="px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-white text-brand-text hover:bg-brand-light border border-brand-border transition-all duration-300">🥩 凍乾肉乾</button>
+            </div>
+
+            <!-- 商品展示網格容器 -->
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 由 JavaScript 渲染商品項目 -->
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= 頁面：商品詳細頁面 (PRODUCT DETAIL) ================= -->
+    <main id="page-product-detail" class="page-section flex-grow pt-20">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- 麵包屑導航 (Breadcrumbs) -->
+            <nav class="flex items-center gap-2 text-sm text-brand-muted mb-8 select-none">
+                <span onclick="switchPage('home')" class="hover:text-brand-primary cursor-pointer transition-colors">首頁</span>
+                <span>/</span>
+                <span onclick="switchPage('shop')" class="hover:text-brand-primary cursor-pointer transition-colors">所有商品</span>
+                <span>/</span>
+                <span id="detail-breadcrumb-active" class="text-brand-dark font-medium">載入中...</span>
+            </nav>
+
+            <!-- 詳情主網格 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-sm">
+                <!-- 左側：高質感圖片框 -->
+                <div id="detail-image-box" class="aspect-square bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] rounded-2xl flex flex-col items-center justify-center select-none shadow-inner border border-brand-border overflow-hidden">
+                    <span class="text-5xl font-extrabold text-brand-dark tracking-wider">p1</span>
+                    <span class="text-xs text-brand-muted tracking-widest font-mono uppercase mt-1">PRODUCT IMAGE</span>
+                </div>
+
+                <!-- 右側：資訊購買控制 -->
+                <div class="flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <span id="detail-category-badge" class="px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-semibold rounded-full">分類</span>
+                            <span id="detail-spec" class="text-xs text-brand-muted font-medium tracking-wider">包裝規格</span>
+                        </div>
+                        <h1 id="detail-title" class="text-2xl sm:text-3xl font-bold text-brand-dark tracking-wide">商品名稱載入中...</h1>
+                        
+                        <div class="flex items-center gap-4 py-2 border-y border-brand-border/60">
+                            <span id="detail-price" class="text-2xl font-extrabold text-brand-primary">NT$ 0</span>
+                            <span id="detail-original-price" class="text-sm text-brand-muted line-through">NT$ 0</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-brand-dark tracking-wider uppercase">✨ 商品精粹特色</h4>
+                            <p id="detail-summary" class="text-sm text-brand-text leading-relaxed">商品介紹載入中...</p>
+                        </div>
+
+                        <div class="space-y-2 p-4 bg-brand-light rounded-xl border border-brand-border">
+                            <h4 class="text-xs font-bold text-brand-dark tracking-wider uppercase">🥩 保證天然成分</h4>
+                            <p id="detail-ingredients" class="text-xs text-brand-muted leading-relaxed">原料明細載入中...</p>
+                        </div>
+
+                        <!-- 串接相對詳細的產品說明區塊 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="p-4 bg-brand-light rounded-xl border border-brand-border">
+                                <h4 class="text-xs font-bold text-brand-dark tracking-wider uppercase mb-1">📊 專業營養分析</h4>
+                                <p id="detail-nutrition" class="text-xs text-brand-muted leading-relaxed">成份比例載入中...</p>
+                            </div>
+                            <div class="p-4 bg-brand-light rounded-xl border border-brand-border">
+                                <h4 class="text-xs font-bold text-brand-dark tracking-wider uppercase mb-1">💡 餵食與保存指南</h4>
+                                <p id="detail-feeding" class="text-xs text-brand-muted leading-relaxed">餵食指南載入中...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 購買控制按鈕 -->
+                    <div class="mt-8 pt-6 border-t border-brand-border/60 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-bold text-brand-dark">選購數量</span>
+                            <div class="flex items-center border border-brand-border rounded-xl overflow-hidden bg-brand-light">
+                                <button onclick="adjustDetailPageQty(-1)" class="px-4 py-2 hover:bg-brand-border text-brand-dark font-medium transition-colors">-</button>
+                                <span id="detail-qty-input" class="px-6 text-sm font-bold select-none">1</span>
+                                <button onclick="adjustDetailPageQty(1)" class="px-4 py-2 hover:bg-brand-border text-brand-dark font-medium transition-colors">+</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button id="detail-add-cart-btn" class="py-4 bg-brand-light hover:bg-brand-border text-brand-dark font-semibold rounded-xl text-sm tracking-widest transition-all">
+                                加入購物車
+                            </button>
+                            <button id="detail-checkout-now-btn" class="py-4 bg-brand-dark hover:bg-brand-primary text-white font-semibold rounded-xl text-sm tracking-widest shadow-lg shadow-brand-dark/10 transition-all">
+                                立即購買
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 你可能也喜歡（推薦商品區塊） -->
+            <div class="mt-16">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-dark mb-8 tracking-wider">✨ 你可能也喜歡</h3>
+                <div id="related-product-list" class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <!-- 由 JavaScript 渲染 -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+
+    <!-- ================= 頁面：聯絡我們 (CONTACT) ================= -->
+    <main id="page-contact" class="page-section flex-grow pt-20">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <span class="text-brand-primary text-xs font-semibold tracking-widest uppercase">Get in touch</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-wider text-brand-dark mt-2 mb-4">與我們聯繫</h2>
+                <div class="w-12 h-0.5 bg-brand-primary mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- 聯絡基本資訊 -->
+                <div class="bg-white rounded-2xl border border-brand-border p-8 sm:p-10 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-brand-dark mb-2">愛你嚼生技有限公司</h3>
+                            <p class="text-sm text-brand-muted">我們重視與每一位家長的溝通，不論是對產品成份的疑慮，還是合作洽談，隨時歡迎您與我們聯繫。</p>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <span class="text-2xl select-none">📞</span>
+                                <div>
+                                    <h4 class="font-bold text-brand-dark text-sm">免付費服務專線</h4>
+                                    <p class="text-sm text-brand-text mt-1">0800-000-000 (週一至週五 10:00 - 18:00)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="text-2xl select-none">✉️</span>
+                                <div>
+                                    <h4 class="font-bold text-brand-dark text-sm">電子信箱</h4>
+                                    <p class="text-sm text-brand-text mt-1">support@hijiao-pet.com</p>
+                                </div>
+                            </div>
+                            <!-- LINE 經典官方 SVG 圖示 -->
+                            <div class="flex items-start gap-4">
+                                <span class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 text-emerald-600">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                        <path d="M21 10.13c0-4.49-4.04-8.13-9-8.13s-9 3.64-9 8.13c0 4 3.23 7.37 7.6 8l-.48 2.87c-.08.47.19.47.4 0l3.35-3.35h.13c4.96 0 9-3.64 9-8.12zm-12 1.37H7.5a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0v2h1a.5.5 0 010 1zm2.5-.5a.5.5 0 01-.5.5H10a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V10h.5a.5.5 0 01.5.5zm2 0a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V10h.5a.5.5 0 01.5.5zm4 0a.5.5 0 01-.5.5h-1.5a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V9.5h1a.5.5 0 010 1h-1v.5h1a.5.5 0 010 1z"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-brand-dark text-sm">官方 LINE 帳號</h4>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://line.me/R/ti/p/@mock" target="_blank" class="text-emerald-600 hover:text-emerald-700 font-semibold inline-flex items-center gap-1 transition-colors text-base">
+                                            @hijiao_pet <span class="text-xs font-normal text-brand-muted">(點擊加入好友)</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- FB 經典官方 SVG 圖示 -->
+                            <div class="flex items-start gap-4">
+                                <span class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 text-blue-600">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M14 13.5h2.5l1-3H14V8.5c0-.8.7-1.5 1.5-1.5H17V4h-3c-2.2 0-4 1.8-4 4v2H8v3h2V20h4v-6.5z"/>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-brand-dark text-sm">Facebook 粉絲專頁</h4>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://facebook.com/mock" target="_blank" class="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center gap-1 transition-colors text-base">
+                                            嗨嚼 Hi-Chew Pet Care <span class="text-xs font-normal text-brand-muted">(點擊前往專頁)</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- IG 經典官方 SVG 圖示 -->
+                            <div class="flex items-start gap-4">
+                                <span class="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 text-rose-600">
+                                    <svg class="w-5 h-5 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-brand-dark text-sm">Instagram 官方帳號</h4>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://instagram.com/mock" target="_blank" class="text-rose-600 hover:text-rose-700 font-semibold inline-flex items-center gap-1 transition-colors text-base">
+                                            @hijiao_pet <span class="text-xs font-normal text-brand-muted">(點擊追蹤 IG)</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-brand-border/60">
+                        <p class="text-xs text-brand-muted">線上即時客服回覆時間：週一至週日 09:00 - 21:00</p>
+                    </div>
+                </div>
+
+                <!-- 聯絡表單 -->
+                <div class="bg-white rounded-2xl border border-brand-border p-8 sm:p-10 shadow-sm">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">您的稱呼</label>
+                            <input type="text" class="w-full bg-brand-light border border-brand-border rounded-xl px-4 py-3.5 text-brand-text text-sm focus:outline-none focus:border-brand-primary focus:bg-white transition-all" required placeholder="例如：毛孩家長 / 您的暱稱">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">聯絡電話</label>
+                            <input type="tel" class="w-full bg-brand-light border border-brand-border rounded-xl px-4 py-3.5 text-brand-text text-sm focus:outline-none focus:border-brand-primary focus:bg-white transition-all" required placeholder="例如：0912345678">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">電子郵件信箱</label>
+                            <input type="email" class="w-full bg-brand-light border border-brand-border rounded-xl px-4 py-3.5 text-brand-text text-sm focus:outline-none focus:border-brand-primary focus:bg-white transition-all" required placeholder="例如：yourname@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">諮詢與留言內容</label>
+                            <textarea rows="4" class="w-full bg-brand-light border border-brand-border rounded-xl px-4 py-3.5 text-brand-text text-sm focus:outline-none focus:border-brand-primary focus:bg-white transition-all resize-none" required placeholder="請填寫您想諮詢的細節或建議..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-dark hover:bg-brand-primary text-white font-medium py-4 rounded-xl tracking-widest shadow-lg shadow-brand-dark/10 transition-all duration-300">
+                            送出留言訊息
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= 購物車滑出式抽屜面板 (Cart Panel) ================= -->
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-brand-text/40 backdrop-blur-sm z-[1100] opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCart(false)"></div>
+    <div id="cart-drawer" class="fixed top-0 -right-full md:-right-[450px] w-full md:w-[450px] h-full bg-white z-[1101] shadow-2xl transition-all duration-300 flex flex-col">
+        <!-- 購物車頭 -->
+        <div class="px-6 py-5 border-b border-brand-border flex items-center justify-between">
+            <span class="text-lg font-bold text-brand-dark tracking-wider">您的購物車</span>
+            <button class="p-2 hover:bg-brand-light rounded-full" onclick="toggleCart(false)">
+                <svg class="w-6 h-6 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 購物車內容 -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-6">
+            <!-- 由 JavaScript 渲染商品項目 -->
+        </div>
+
+        <!-- 購物車腳與合計 -->
+        <div class="p-6 border-t border-brand-border bg-brand-light space-y-4">
+            <div class="flex items-center justify-between font-bold text-brand-dark text-lg">
+                <span>合計金額</span>
+                <span id="cart-total">NT$ 0</span>
+            </div>
+            <button onclick="checkoutCart()" class="w-full py-4 bg-brand-dark hover:bg-brand-primary text-white rounded-xl font-bold tracking-widest shadow-md transition-all">
+                前往安全結帳
+            </button>
+        </div>
     </div>
 
-    <!-- 主角介紹卡片 -->
-    <div class="characters-grid">
-      <div class="character-card">
-        <!-- Paludo 照片連結至上傳的黑柴檔案 -->
-        <img src="kuro_shiba_taiwan_alley.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=300&q=80';" alt="黑柴 Paludo" class="character-avatar">
-        <div class="character-details">
-          <h3>Paludo</h3>
-          <span class="tag">黑柴 (Kuro Shiba)</span>
-          <p>擁有一身帥氣烏黑亮麗的毛髮，胸前襯著醒目的白色V字胸領，兩頰帶有溫暖的奶油胡麻色。最喜歡在充滿古樸仙草香的台灣老街巷弄裡帥氣漫步，熱愛風的氣味、老街的陽光，以及每一次烤箱響起的美味訊號！</p>
+
+    <!-- 頁尾 -->
+    <footer class="bg-[#332d2b] text-brand-light py-16 px-4 sm:px-6 lg:px-8 mt-auto rounded-t-[40px]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold tracking-widest text-brand-primary">嗨嚼</h3>
+                <p class="text-sm text-[#bfaea7] leading-relaxed max-w-sm">專注於毛孩的天然原肉美味，我們相信自然純粹就是給寶貝最奢華的溫柔寵愛。</p>
+                <!-- 放大且加入經典社群圖示的社群聯絡按鈕 -->
+                <div class="flex gap-4 pt-2">
+                    <!-- LINE Classic Icon Button -->
+                    <a href="https://line.me/R/ti/p/@mock" target="_blank" class="w-12 h-12 bg-[#4a423e] hover:bg-emerald-600 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-md" title="加入官方 LINE">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M21 10.13c0-4.49-4.04-8.13-9-8.13s-9 3.64-9 8.13c0 4 3.23 7.37 7.6 8l-.48 2.87c-.08.47.19.47.4 0l3.35-3.35h.13c4.96 0 9-3.64 9-8.12zm-12 1.37H7.5a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0v2h1a.5.5 0 010 1zm2.5-.5a.5.5 0 01-.5.5H10a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V10h.5a.5.5 0 01.5.5zm2 0a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V10h.5a.5.5 0 01.5.5zm4 0a.5.5 0 01-.5.5h-1.5a.5.5 0 01-.5-.5V8.5a.5.5 0 011 0V9.5h1a.5.5 0 010 1h-1v.5h1a.5.5 0 010 1z"/>
+                        </svg>
+                    </a>
+                    <!-- FB Classic Icon Button -->
+                    <a href="https://facebook.com/mock" target="_blank" class="w-12 h-12 bg-[#4a423e] hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-md" title="追蹤 Facebook">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M14 13.5h2.5l1-3H14V8.5c0-.8.7-1.5 1.5-1.5H17V4h-3c-2.2 0-4 1.8-4 4v2H8v3h2V20h4v-6.5z"/>
+                        </svg>
+                    </a>
+                    <!-- IG Classic Icon Button -->
+                    <a href="https://instagram.com/mock" target="_blank" class="w-12 h-12 bg-[#4a423e] hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-md" title="追蹤 Instagram">
+                        <svg class="w-5 h-5 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold tracking-wider mb-6">快速導覽</h4>
+                <ul class="space-y-3 text-sm text-[#bfaea7]">
+                    <li><a onclick="switchPage('home')" class="hover:text-brand-primary cursor-pointer transition-colors">• 首頁</a></li>
+                    <li><a onclick="switchPage('about')" class="hover:text-brand-primary cursor-pointer transition-colors">• 品牌故事</a></li>
+                    <li><a onclick="switchPage('shop')" class="hover:text-brand-primary cursor-pointer transition-colors">• 所有商品</a></li>
+                    <li><a onclick="switchPage('contact')" class="hover:text-brand-primary cursor-pointer transition-colors">• 聯絡我們</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold tracking-wider mb-6">寵物專區</h4>
+                <ul class="space-y-3 text-sm text-[#bfaea7]">
+                    <li><a onclick="switchPage('shop', 'cat')" class="hover:text-brand-primary cursor-pointer transition-colors">• 貓咪鮮食零嘴</a></li>
+                    <li><a onclick="switchPage('shop', 'dog')" class="hover:text-brand-primary cursor-pointer transition-colors">• 狗狗磨牙肉乾</a></li>
+                    <li><a onclick="switchPage('shop', 'treats')" class="hover:text-brand-primary cursor-pointer transition-colors">• 頂級低溫凍乾</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="character-card">
-        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80" alt="英短 Mila" class="character-avatar">
-        <div class="character-details">
-          <h3>Mila</h3>
-          <span class="tag">英國短毛貓 (British Shorthair)</span>
-          <p>優雅安靜的藍灰貓咪，擁有一雙明亮的琥珀色大眼睛。最喜歡在窗台享受午後日光，雖然常覺得 Paludo 傻氣，卻最愛貼著牠一塊睡覺。</p>
+        <div class="max-w-7xl mx-auto border-t border-[#4a423e] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8a7e78]">
+            <p>&copy; 2026 愛你嚼生技有限公司. 版權所有.</p>
+            <p>本網站為精緻 brand 復刻版設計</p>
         </div>
-      </div>
-    </div>
+    </footer>
 
-    <!-- 故事繪本牆 -->
-    <div class="story-chapters">
-      
-      <!-- 篇章 1 -->
-      <div class="story-row">
-        <div class="story-content">
-          <h3><span>Chapter 01</span>廚房裡的香氣魔法</h3>
-          <p>午後兩點，是屋子裡最靜謐溫馨的時刻。隨著低溫烘焙機緩緩運作，淡淡而純粹的肉香在空氣中漫延。原本在客廳沙發打盹的 Paludo 會瞬間睜開眼睛，抖抖那一身帥氣的黑亮毛髮，踏著輕快的「嗒嗒」腳步坐鎮在廚房門口；而假寐的 Mila 則會輕盈跳下窗台，像一朵灰色的雲朵般優雅靠攏。牠們都在期待今天新鮮手作的出爐時分。</p>
-        </div>
-        <div class="story-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80" alt="廚房裡的烘焙暖光">
-        </div>
-      </div>
 
-      <!-- 篇章 2 -->
-      <div class="story-row reverse">
-        <div class="story-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=600&q=80" alt="專注咬咬的療癒時刻">
-        </div>
-        <div class="story-content">
-          <h3><span>Chapter 02</span>專注的療癒時光</h3>
-          <p>當溫熱金黃的「低溫烘焙豬耳多」遞到 Paludo 面前，牠便會用爪子按住，專注而神聖地啃咬起來。「咔滋、咔滋……」那種酥脆清爽的碎裂聲，不僅讓牠平靜下來，也彷彿洗滌了忙碌生活中的浮躁。一旁靜靜看著的 Mila，尾巴偶爾微微勾起，也感受到了這份單純而療癒的快樂。</p>
-        </div>
-      </div>
+    <!-- ================= 前端核心 JavaScript 邏輯控制 ================= -->
+    <script>
+        // 用來追蹤圖片載入嘗試次數，防止無限循環重載
+        const imageRetryCount = {};
 
-      <!-- 篇章 3 -->
-      <div class="story-row">
-        <div class="story-content">
-          <h3><span>Chapter 03</span>貓草的草本魔法</h3>
-          <p>「好啦，也有妳的。」當微甜芬芳的「貓草雞肉薄片」放在 Mila 面前時，天然草本與鮮甜雞肉的雙重香氣讓牠驚喜得瞳孔放大。細細咬下那酥脆的薄片，喉嚨裡泛起一陣滿足的「嚕嚕」聲。這是屬於 Mila 與 Paludo 在午後的小確幸，連空氣也跟著變得溫柔放鬆。</p>
-        </div>
-        <div class="story-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1513360309081-36f5e878fc9e?auto=format&fit=crop&w=600&q=80" alt="貓咪與草本美味">
-        </div>
-      </div>
+        // 智慧型自動修復與靜默加載導回機制：
+        // 如果本地 heychewp*.png 因沙箱延遲或尚未上傳而失敗，
+        // 將自動、靜默地以高質感 Unsplash 貓狗實景照片取代。
+        // 這能確保 Preview 呈現最美觀的視覺體驗，而您在 GitHub 上線時能無縫抓取您的實體圖檔！
+        function handleImageError(img, code, emoji) {
+            const src = img.src;
+            
+            // 1. 本地環境下延時 1 秒重試（修復加載慢或異步問題）
+            if (!imageRetryCount[src]) {
+                imageRetryCount[src] = 1;
+                setTimeout(() => {
+                    img.src = src + '?retry=' + Date.now();
+                }, 1000);
+                return;
+            }
 
-    </div>
-  </div>
-</section>
+            // 2. 重試失敗後，靜默無痕地載入對應的高解析 Unsplash 情境美照（不再顯示繁雜的警告或暗色黑屏）
+            const fallbacks = {
+                'p1': 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=600&q=80', // 手工豬耳朵 / 狗狗看零嘴
+                'p2': 'https://images.unsplash.com/photo-1541599540903-216a46ca1bf0?auto=format&fit=crop&w=600&q=80', // 鮮切豬里肌 / 狗罐原肉
+                'p3': 'https://images.unsplash.com/photo-1608454367599-c1139e6443ef?auto=format&fit=crop&w=600&q=80', // 凍乾雞丁 / 狗狗碗鮮食
+                'p4': 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80', // 貓草雞肉薄片 / 貓咪吃草
+                'p5': 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=600&q=80', // 里肌貓用 / 撒嬌貓咪
+                'p6': 'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&q=80'  // 凍乾貓用 / 玩耍貓咪
+            };
 
-<!-- 關於我們 & BANNER -->
-<section class="container" id="about">
-  <div class="interaction-banner">
-    <h2>「牠不懂什麼是成分，但牠懂什麼是愛。」</h2>
-    <p>Paludo & Mila 從自家廚房出發，堅持不添加人工香料與防腐劑，只為了給家人最安心的那一口。我們透過 Google 表單接單生產，確保每一份零嘴都維持最高的新鮮度與手感溫度。</p>
-    <div class="banner-btns">
-      <a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform" target="_blank" class="btn" style="background: white; color: var(--moss);">填寫訂購單</a>
-      <a href="https://line.me/ti/p/你的LINE連結" target="_blank" class="btn btn-line">
-        加入官方 LINE 諮詢
-      </a>
-    </div>
-  </div>
-</section>
+            const fallbackUrl = fallbacks[code] || fallbacks['p1'];
+            if (img.src !== fallbackUrl) {
+                img.src = fallbackUrl;
+            }
+        }
 
-<footer>
-  <div class="footer-logo">Paludo <span>&</span> Mila</div>
-  <p style="margin-bottom: 1.5rem; color: var(--ink-mid);">在地天然．純粹手作．愛在齒間</p>
-  <ul class="footer-links">
-    <li><a href="#products">產品目錄</a></li>
-    <li><a href="https://line.me/ti/p/你的LINE連結">聯繫客服</a></li>
-    <li><a href="https://docs.google.com/forms/d/1q3tkfU152QshWj9AdoYxZQcjpzXWq1ZzCxo4uGf6q5Y/viewform">訂購流程</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 Paludo & Mila. 守護毛孩的每一口純粹</div>
-</footer>
+        // ================= 1. 模擬寵物商品資料庫 =================
+        const productsDatabase = [
+            {
+                id: 1,
+                name: "香脆耐咬 手工豬耳朵",
+                price: 280,
+                originalPrice: 380,
+                category: "dog",
+                badge: "汪星磨牙推薦",
+                emoji: "🐷🐕",
+                imgCode: "p1",
+                imgUrl: "heychewp1.png", // 第一款商品實體圖片檔名
+                summary: "100%優質豬耳朵低溫慢烘烘製。保留天然膠原蛋白，結構強韌，能讓狗狗安全啃咬、清潔齒垢，同時釋放焦慮壓力。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以上",
+                feeding: "一次一片 增加互動與獎勵"
+            },
+            {
+                id: 2,
+                name: "極致純肉 鮮切豬里肌 (犬用)",
+                price: 260,
+                originalPrice: 350,
+                category: "dog",
+                badge: "低脂高蛋白",
+                emoji: "🥩🐶",
+                imgCode: "p2",
+                imgUrl: "heychewp2.png", // 第二款商品實體圖片檔名
+                summary: "挑選肉質最緊實且超低脂肪的新鮮豬里肌肉，經高規格低溫脫水烘焙。呈現純原肉的天然香氣，口感扎實富有嚼勁。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以下",
+                feeding: "一次一片 增加互動與獎勵"
+            },
+            {
+                id: 3,
+                name: "急速鎖鮮 凍乾雞丁 (犬用)",
+                price: 320,
+                originalPrice: 420,
+                category: "treats",
+                badge: "航太級凍乾",
+                emoji: "🍗🐩",
+                imgCode: "p3",
+                imgUrl: "heychewp3.png", // 第三款商品實體圖片檔名
+                summary: "採用零下40度急速冷凍與真空乾燥技術。完全鎖住新鮮雞胸肉的多汁與營養，質地酥脆鬆軟，泡水3秒即可還原鮮美口感。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以下",
+                feeding: "一次一片 增加互動與獎勵"
+            },
+            {
+                id: 4,
+                name: "舒壓溫和 貓草雞肉薄片",
+                price: 240,
+                originalPrice: 320,
+                category: "cat",
+                badge: "天然排毛",
+                emoji: "🌿🐈",
+                imgCode: "p4",
+                imgUrl: "heychewp4.png", // 第四款商品實體圖片檔名
+                summary: "新鮮優質低脂雞胸肉拌入貓咪最愛的有機小麥草粉，低溫手工慢烘成香脆薄片。膳食纖維豐富，有助貓咪舒壓及健康排出毛球。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以上",
+                feeding: "一次一片 增加互動與獎勵"
+            },
+            {
+                id: 5,
+                name: "特級原肉 鮮切豬里肌 (貓用)",
+                price: 260,
+                originalPrice: 350,
+                category: "cat",
+                badge: "貓奴必備",
+                emoji: "🥩🐱",
+                imgCode: "p5",
+                imgUrl: "heychewp5.png", // 第五款商品實體圖片對應路徑
+                summary: "專為貓咪輕巧的咬合與進食習慣量身切片，厚度極薄、好撕咬。低脂高能，提供不愛喝水的貓咪最期待的原味肉食享受。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以下",
+                feeding: "一次一片 增加互動與獎勵"
+            },
+            {
+                id: 6,
+                name: "急速鎖鮮 凍乾雞丁 (貓用)",
+                price: 320,
+                originalPrice: 420,
+                category: "treats",
+                badge: "適口性極佳",
+                emoji: "🍗🐾",
+                imgCode: "p6",
+                imgUrl: "heychewp6.png", // 第六款商品實體圖片預配路徑
+                summary: "極速真空凍乾鎖住活性牛磺酸與營養微量元素。香脆清爽，能直接當訓練零食，亦可捏碎拌入日常乾糧或副食罐中補水。",
+                ingredients: "[ 待輸入：原料成分 ]",
+                spec: "包裝規格：50 克/袋",
+                nutrition: "每一份量 50 公克 (本包裝含 1 份)<br><br>• 粗蛋白 ──── 37% 以上<br>• 粗脂肪 ──── 10% 以上<br>• 粗纖維 ──── 3% 以下<br>• 粗灰份 ──── 8% 以下<br>• 水份 ───── 22% 以下",
+                feeding: "一次一片 增加互動與獎勵"
+            }
+        ];
 
-<script>
-  // 捲動顯示動畫
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-  };
+        // 購物車暫存陣列 (In-memory cart)
+        let cart = [];
+        // 商品詳情頁當前選取的商品與數量狀態
+        let currentDetailProduct = null;
+        let currentDetailQty = 1;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
+        // ================= 2. 單頁式網頁切換系統 (SPA Page Router) =================
+        function switchPage(pageId, categoryFilter = 'all') {
+            try {
+                // 隱藏全部
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(sec => sec.classList.remove('active'));
 
-  // 註冊所有在視窗滾動時需要顯現的區塊與元素
-  document.querySelectorAll('.product-card, .character-card, .story-row, .interaction-banner').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    observer.observe(el);
-  });
-</script>
+                // 顯示當前
+                const target = document.getElementById(`page-${pageId}`);
+                if (target) {
+                    target.classList.add('active');
+                }
 
+                // 更新網頁視窗置頂
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // 特殊分頁行為：如果切換至商城，連動篩選商品
+                if (pageId === 'shop') {
+                    filterProducts(categoryFilter);
+                }
+            } catch (e) {
+                console.error("Error in switchPage:", e);
+            }
+        }
+
+        // ================= 3. 頂部 Banner 自動輪播 =================
+        let activeSlideIdx = 0;
+
+        function setSlide(index) {
+            try {
+                const slides = document.querySelectorAll('.slide');
+                const dots = document.querySelectorAll('.slide-dot');
+                if (!slides || slides.length === 0) return;
+
+                // 確保 index 始終在安全範圍內
+                index = (index + slides.length) % slides.length;
+
+                // 安全退場：隱藏前一個 Slide
+                if (slides[activeSlideIdx]) {
+                    slides[activeSlideIdx].classList.remove('opacity-100');
+                    slides[activeSlideIdx].classList.add('opacity-0');
+                }
+                
+                if (dots && dots[activeSlideIdx]) {
+                    dots[activeSlideIdx].classList.remove('w-10', 'bg-brand-dark');
+                    dots[activeSlideIdx].classList.add('w-3', 'bg-brand-dark/30');
+                }
+
+                // 更新指標
+                activeSlideIdx = index;
+
+                // 安全進場：顯示新 Slide
+                if (slides[activeSlideIdx]) {
+                    slides[activeSlideIdx].classList.remove('opacity-0');
+                    slides[activeSlideIdx].classList.add('opacity-100');
+                }
+                
+                if (dots && dots[activeSlideIdx]) {
+                    dots[activeSlideIdx].classList.remove('w-3', 'bg-brand-dark/30');
+                    dots[activeSlideIdx].classList.add('w-10', 'bg-brand-dark');
+                }
+            } catch (e) {
+                console.error("Error in setSlide:", e);
+            }
+        }
+
+        // 自動輪播機制
+        function autoRotateSlides() {
+            try {
+                const slides = document.querySelectorAll('.slide');
+                if (!slides || slides.length === 0) return;
+                let next = (activeSlideIdx + 1) % slides.length;
+                setSlide(next);
+            } catch (e) {
+                console.error("Error in autoRotateSlides:", e);
+            }
+        }
+        let sliderTimer = setInterval(autoRotateSlides, 5000); // 5 秒輪播一次
+
+        // ================= 4. 商品過濾與渲染邏輯 =================
+        function filterProducts(category) {
+            try {
+                // 更新篩選按鈕狀態
+                const categories = ['all', 'cat', 'dog', 'treats'];
+                categories.forEach(cat => {
+                    const btn = document.getElementById(`btn-filter-${cat}`);
+                    if (btn) {
+                        if (cat === category) {
+                            btn.className = "px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-brand-dark text-white shadow-sm border border-brand-dark transition-all duration-300";
+                        } else {
+                            btn.className = "px-6 py-2.5 rounded-full text-sm font-medium tracking-wider bg-white text-brand-text hover:bg-brand-light border border-brand-border transition-all duration-300";
+                        }
+                    }
+                });
+
+                // 渲染商品
+                const container = document.getElementById('product-list');
+                if (!container) return; // 安全防錯機制
+                container.innerHTML = '';
+
+                // 智慧關聯篩選：將分類關聯對應
+                const filteredData = productsDatabase.filter(p => {
+                    if (category === 'all') return true;
+                    if (category === 'cat') {
+                        return p.category === 'cat' || (p.category === 'treats' && p.name.includes('貓用'));
+                    }
+                    if (category === 'dog') {
+                        return p.category === 'dog' || (p.category === 'treats' && p.name.includes('犬用'));
+                    }
+                    if (category === 'treats') {
+                        return p.category === 'treats';
+                    }
+                    return p.category === category;
+                });
+
+                filteredData.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-2xl overflow-hidden border border-brand-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-col";
+                    
+                    // 智慧雙軌圖片標籤渲染
+                    const imageMarkup = item.imgUrl
+                        ? `<img src="${item.imgUrl}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="handleImageError(this, '${item.imgCode}', '${item.emoji}')">`
+                        : `<div class="flex flex-col items-center justify-center gap-1 group-hover:scale-105 transition-transform duration-500 w-full h-full">
+                                <span class="text-3xl font-bold tracking-wider text-brand-dark">${item.imgCode}</span>
+                                <span class="text-[10px] text-brand-muted tracking-widest font-mono uppercase">IMAGE PLACEHOLDER</span>
+                                <span class="text-xl mt-1 opacity-80">${item.emoji}</span>
+                            </div>`;
+
+                    card.innerHTML = `
+                        <div onclick="navigateToDetail(${item.id})" class="relative bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] aspect-square flex flex-col items-center justify-center select-none group overflow-hidden cursor-pointer border-b border-brand-border/40">
+                            <span class="absolute top-4 left-4 bg-brand-primary text-white text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full z-10">${item.badge}</span>
+                            ${imageMarkup}
+                        </div>
+                        <div class="p-6 flex flex-col justify-between flex-grow text-center">
+                            <div class="space-y-2 mb-6 cursor-pointer" onclick="navigateToDetail(${item.id})">
+                                <h3 class="text-base sm:text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors">${item.name}</h3>
+                                <p class="text-xs text-brand-muted line-clamp-2 leading-relaxed">${item.summary}</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-center gap-3 mb-5">
+                                    <span class="text-brand-primary font-bold text-lg">NT$ ${item.price}</span>
+                                    <span class="text-xs text-brand-muted line-through">NT$ ${item.originalPrice}</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button onclick="navigateToDetail(${item.id})" class="py-2.5 bg-brand-light hover:bg-brand-border text-brand-dark font-medium rounded-xl text-xs transition-all">查看詳情</button>
+                                    <button onclick="addToCart(${item.id})" class="py-2.5 bg-brand-primary hover:bg-brand-dark text-white font-medium rounded-xl text-xs transition-all">加入購物車</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) {
+                console.error("Error in filterProducts:", e);
+            }
+        }
+
+        // ================= 4.5. 切換至商品專屬詳細頁面 =================
+        function navigateToDetail(productId) {
+            try {
+                const product = productsDatabase.find(p => p.id === productId);
+                if (!product) return;
+
+                // 設定當前操作商品
+                currentDetailProduct = product;
+                currentDetailQty = 1; // 重設預設選取數量
+
+                // 1. 綁定基本資料
+                const breadcrumb = document.getElementById('detail-breadcrumb-active');
+                if (breadcrumb) breadcrumb.innerText = product.name;
+                
+                const detailImageBox = document.getElementById('detail-image-box');
+                if (detailImageBox) {
+                    if (product.imgUrl) {
+                        detailImageBox.className = "aspect-square bg-white rounded-2xl flex items-center justify-center select-none shadow-inner border border-brand-border overflow-hidden";
+                        detailImageBox.innerHTML = `<img src="${product.imgUrl}" alt="${product.name}" class="w-full h-full object-cover" onerror="handleImageError(this, '${product.imgCode}', '${product.emoji}')">`;
+                    } else {
+                        detailImageBox.className = "aspect-square bg-gradient-to-br from-[#fbf7f5] to-[#f5eae4] rounded-2xl flex flex-col items-center justify-center select-none shadow-inner border border-brand-border";
+                        detailImageBox.innerHTML = `
+                            <div class="text-center space-y-2">
+                                <div class="text-5xl font-extrabold text-brand-dark tracking-wider">${product.imgCode}</div>
+                                <div class="text-xs text-brand-muted tracking-widest font-mono uppercase">MAIN PRODUCT IMAGE</div>
+                                <div class="text-4xl mt-2">${product.emoji}</div>
+                            </div>
+                        `;
+                    }
+                }
+
+                const dTitle = document.getElementById('detail-title');
+                if (dTitle) dTitle.innerText = product.name;
+
+                const dPrice = document.getElementById('detail-price');
+                if (dPrice) dPrice.innerText = `NT$ ${product.price}`;
+
+                const dOrigPrice = document.getElementById('detail-original-price');
+                if (dOrigPrice) dOrigPrice.innerText = `NT$ ${product.originalPrice}`;
+
+                const dSummary = document.getElementById('detail-summary');
+                if (dSummary) dSummary.innerText = product.summary;
+
+                const dIngredients = document.getElementById('detail-ingredients');
+                if (dIngredients) dIngredients.innerText = product.ingredients;
+
+                const dQty = document.getElementById('detail-qty-input');
+                if (dQty) dQty.innerText = currentDetailQty;
+
+                // 綁定動態詳細產品規格欄位
+                const dSpec = document.getElementById('detail-spec');
+                if (dSpec) dSpec.innerText = product.spec || "包裝規格：見包裝";
+
+                const dNutrition = document.getElementById('detail-nutrition');
+                if (dNutrition) dNutrition.innerHTML = product.nutrition || "成份比例載入中...";
+
+                const dFeeding = document.getElementById('detail-feeding');
+                if (dFeeding) dFeeding.innerText = product.feeding || "建議餵食量請依毛孩體重調整。";
+
+                // 類別標籤文字對應
+                const catBadge = document.getElementById('detail-category-badge');
+                if (catBadge) {
+                    if (product.category === 'cat') {
+                        catBadge.innerText = '🐱 貓咪專區';
+                    } else if (product.category === 'dog') {
+                        catBadge.innerText = '🐶 狗狗專區';
+                    } else {
+                        catBadge.innerText = '🥩 凍乾肉乾';
+                    }
+                }
+
+                // 2. 綁定按鈕點擊事件
+                const addCartBtn = document.getElementById('detail-add-cart-btn');
+                if (addCartBtn) {
+                    addCartBtn.onclick = function() {
+                        addToCartCustomQty(product.id, currentDetailQty);
+                    };
+                }
+
+                const checkoutBtn = document.getElementById('detail-checkout-now-btn');
+                if (checkoutBtn) {
+                    checkoutBtn.onclick = function() {
+                        checkoutImmediately(product.id, currentDetailQty);
+                    };
+                }
+
+                // 3. 渲染「你可能也喜歡」推薦商品
+                renderRelatedProducts(product.category, product.id);
+
+                // 4. 切換到產品詳細頁面
+                switchPage('product-detail');
+            } catch (e) {
+                console.error("Error in navigateToDetail:", e);
+            }
+        }
+
+        // 商品詳細頁數量調節
+        function adjustDetailPageQty(amount) {
+            currentDetailQty += amount;
+            if (currentDetailQty < 1) {
+                currentDetailQty = 1;
+            }
+            const dQty = document.getElementById('detail-qty-input');
+            if (dQty) dQty.innerText = currentDetailQty;
+        }
+
+        // 詳情頁專屬加購功能
+        function addToCartCustomQty(productId, qty) {
+            try {
+                const product = productsDatabase.find(p => p.id === productId);
+                if (!product) return;
+
+                const existingItem = cart.find(i => i.id === productId);
+                if (existingItem) {
+                    existingItem.quantity += qty;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        emoji: product.emoji,
+                        imgCode: product.imgCode, 
+                        imgUrl: product.imgUrl || null, // 保存真實圖片網址至購物車暫存
+                        quantity: qty
+                    });
+                }
+
+                updateCartDOM();
+                triggerToast(`已將 ${qty} 包「${product.name}」加入購物車`);
+            } catch (e) {
+                console.error("Error in addToCartCustomQty:", e);
+            }
+        }
+
+        // 立即購買直接結帳
+        function checkoutImmediately(productId, qty) {
+            try {
+                const product = productsDatabase.find(p => p.id === productId);
+                if (!product) return;
+                
+                // 先清空原本可能有的此商品，直接以該數量加入購物車並滑出結帳
+                cart = cart.filter(i => i.id !== productId);
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    emoji: product.emoji,
+                    imgCode: product.imgCode,
+                    imgUrl: product.imgUrl || null, // 保存真實圖片網址至購物車暫存
+                    quantity: qty
+                });
+                updateCartDOM();
+                toggleCart(true); // 開啟購物車側邊
+            } catch (e) {
+                console.error("Error in checkoutImmediately:", e);
+            }
+        }
+
+        // 渲染關聯推薦商品
+        function renderRelatedProducts(category, currentId) {
+            try {
+                const relatedContainer = document.getElementById('related-product-list');
+                if (!relatedContainer) return;
+                relatedContainer.innerHTML = '';
+
+                // 挑選與當前商品同種類、且不為當前商品的產品 (最多挑 3 個)
+                const related = productsDatabase
+                    .filter(p => p.category === category && p.id !== currentId)
+                    .slice(0, 3);
+
+                // 如果同分類不夠 3 個，就隨意拿其他的補齊
+                if (related.length < 3) {
+                    const rest = productsDatabase.filter(p => p.id !== currentId && !related.includes(p));
+                    related.push(...rest.slice(0, 3 - related.length));
+                }
+
+                related.forEach(item => {
+                    const rCard = document.createElement('div');
+                    rCard.className = "bg-white rounded-2xl overflow-hidden border border-brand-border p-4 shadow-sm hover:shadow-md transition-all cursor-pointer text-center";
+                    rCard.onclick = () => navigateToDetail(item.id);
+                    
+                    const relImageMarkup = item.imgUrl
+                        ? `<img src="${item.imgUrl}" alt="${item.name}" class="w-full h-full object-cover" onerror="handleImageError(this, '${item.imgCode}', '${item.emoji}')">`
+                        : `<div class="flex flex-col items-center justify-center gap-1 w-full h-full">
+                               <span class="text-xl font-extrabold text-brand-dark">${item.imgCode}</span>
+                               <span class="text-[8px] text-brand-muted tracking-widest font-mono uppercase">IMAGE</span>
+                               <span class="text-2xl mt-1">${item.emoji}</span>
+                           </div>`;
+
+                    rCard.innerHTML = `
+                        <div class="bg-brand-light aspect-square flex flex-col items-center justify-center rounded-xl mb-4 select-none border border-brand-border/40 overflow-hidden relative">
+                            ${relImageMarkup}
+                        </div>
+                        <h4 class="text-sm font-bold text-brand-dark mb-1 hover:text-brand-primary">${item.name}</h4>
+                        <div class="text-brand-primary font-bold text-sm">NT$ ${item.price}</div>
+                    `;
+                    relatedContainer.appendChild(rCard);
+                });
+            } catch (e) {
+                console.error("Error in renderRelatedProducts:", e);
+            }
+        }
+
+        // ================= 5. 精緻客製彈出通知 Toast =================
+        function triggerToast(message, icon = '✨') {
+            try {
+                const toast = document.getElementById('toast');
+                const toastText = document.getElementById('toast-text');
+                const toastIcon = document.getElementById('toast-icon');
+                if (!toast || !toastText || !toastIcon) return;
+
+                toastText.innerText = message;
+                toastIcon.innerText = icon;
+
+                // 顯示
+                toast.classList.remove('-translate-y-24', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                // 自動隱藏
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('-translate-y-24', 'opacity-0');
+                }, 2500);
+            } catch (e) {
+                console.error("Error in triggerToast:", e);
+            }
+        }
+
+        // ================= 6. 購物車邏輯核心 (Cart Control) =================
+        function toggleCart(show) {
+            try {
+                const drawer = document.getElementById('cart-drawer');
+                const overlay = document.getElementById('cart-drawer-overlay');
+                if (!drawer || !overlay) return;
+
+                if (show) {
+                    drawer.classList.remove('-right-full', 'md:-right-[450px]');
+                    drawer.classList.add('right-0');
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    drawer.classList.add('-right-full', 'md:-right-[450px]');
+                    drawer.classList.remove('right-0');
+                    overlay.classList.add('opacity-0', 'pointer-events-none');
+                    overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            } catch (e) {
+                console.error("Error in toggleCart:", e);
+            }
+        }
+
+        function addToCart(productId) {
+            try {
+                const product = productsDatabase.find(p => p.id === productId);
+                if (!product) return;
+
+                const existingItem = cart.find(i => i.id === productId);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        emoji: product.emoji,
+                        imgCode: product.imgCode,
+                        imgUrl: product.imgUrl || null, // 同步儲存真實圖片
+                        quantity: 1
+                    });
+                }
+
+                updateCartDOM();
+                triggerToast(`已將「${product.name}」加入購物車`);
+            } catch (e) {
+                console.error("Error in addToCart:", e);
+            }
+        }
+
+        // 調整購物車件數
+        function adjustQty(productId, amount) {
+            try {
+                const item = cart.find(i => i.id === productId);
+                if (!item) return;
+
+                item.quantity += amount;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                updateCartDOM();
+            } catch (e) {
+                console.error("Error in adjustQty:", e);
+            }
+        }
+
+        // 移除購物車單一品項
+        function removeItem(productId) {
+            try {
+                cart = cart.filter(i => i.id !== productId);
+                updateCartDOM();
+                triggerToast("商品已自購物車中移除", "🗑️");
+            } catch (e) {
+                console.error("Error in removeItem:", e);
+            }
+        }
+
+        function updateCartDOM() {
+            try {
+                const countBadge = document.getElementById('cart-count');
+                const itemsContainer = document.getElementById('cart-items-container');
+                const totalSpan = document.getElementById('cart-total');
+                if (!countBadge || !itemsContainer || !totalSpan) return;
+
+                // 計算合計總數量
+                const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
+                countBadge.innerText = totalQty;
+
+                itemsContainer.innerHTML = '';
+
+                if (cart.length === 0) {
+                    itemsContainer.innerHTML = `
+                        <div class="h-64 flex flex-col items-center justify-center text-center space-y-3">
+                            <span class="text-5xl select-none">🛒</span>
+                            <p class="text-sm text-brand-muted">您的購物車目前空空如也</p>
+                        </div>
+                    `;
+                    totalSpan.innerText = "NT$ 0";
+                    return;
+                }
+
+                let cartSumPrice = 0;
+
+                cart.forEach(item => {
+                    cartSumPrice += item.price * item.quantity;
+                    
+                    const cartImageMarkup = item.imgUrl
+                        ? `<img src="${item.imgUrl}" alt="${item.name}" class="w-full h-full object-cover rounded-xl" onerror="handleImageError(this, '${item.imgCode}', '${item.emoji}')">`
+                        : `<div class="flex flex-col items-center justify-center text-[10px] w-full h-full">
+                               <span class="font-bold text-brand-dark">${item.imgCode}</span>
+                               <span>${item.emoji}</span>
+                           </div>`;
+
+                    const div = document.createElement('div');
+                    div.className = "flex gap-4 items-center pb-5 border-b border-brand-border/60";
+                    div.innerHTML = `
+                        <div class="bg-brand-light w-16 h-16 rounded-xl flex flex-col items-center justify-center text-xs select-none flex-shrink-0 overflow-hidden border border-brand-border/40 relative">
+                            ${cartImageMarkup}
+                        </div>
+                        <div class="flex-grow space-y-1">
+                            <h4 class="text-sm font-bold text-brand-dark">${item.name}</h4>
+                            <div class="text-xs text-brand-primary font-medium">NT$ ${item.price}</div>
+                            <div class="flex items-center justify-between pt-1">
+                                <div class="flex items-center border border-brand-border rounded-lg bg-brand-light overflow-hidden">
+                                    <button onclick="adjustQty(${item.id}, -1)" class="px-2 py-1 text-xs hover:bg-brand-border transition-colors">-</button>
+                                    <span class="px-3 text-xs font-semibold">${item.quantity}</span>
+                                    <button onclick="adjustQty(${item.id}, 1)" class="px-2 py-1 text-xs hover:bg-brand-border transition-colors">+</button>
+                                </div>
+                                <button onclick="removeItem(${item.id})" class="text-red-500 hover:text-red-700 text-xs font-medium">移除</button>
+                            </div>
+                        </div>
+                    `;
+                    itemsContainer.appendChild(div);
+                });
+
+                totalSpan.innerText = `NT$ ${cartSumPrice}`;
+            } catch (e) {
+                console.error("Error in updateCartDOM:", e);
+            }
+        }
+
+        function checkoutCart() {
+            try {
+                if (cart.length === 0) {
+                    triggerToast("購物車內無商品無法結帳喔", "⚠️");
+                    return;
+                }
+                triggerToast("模擬安全金流連線結帳中...", "🔒");
+                setTimeout(() => {
+                    cart = [];
+                    updateCartDOM();
+                    toggleCart(false);
+                    triggerToast("【模擬結帳成功】感謝您的支持！", "🎉");
+                }, 2000);
+            } catch (e) {
+                console.error("Error in checkoutCart:", e);
+            }
+        }
+
+        // ================= 8. 行動版選單開關 =================
+        function toggleMobileDrawer(show) {
+            try {
+                const drawer = document.getElementById('mobile-drawer');
+                const overlay = document.getElementById('mobile-drawer-overlay');
+                if (!drawer || !overlay) return;
+
+                if (show) {
+                    drawer.classList.remove('-left-80');
+                    drawer.classList.add('left-0');
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    drawer.classList.add('-left-80');
+                    drawer.classList.remove('left-0');
+                    overlay.classList.add('opacity-0', 'pointer-events-none');
+                    overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            } catch (e) {
+                console.error("Error in toggleMobileDrawer:", e);
+            }
+        }
+
+        // ================= 9. 聯絡我們送出模擬 =================
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            triggerToast("訊息已成功送出！我們將儘速與您聯絡", "✉️");
+            event.target.reset();
+        }
+
+        // 初始載入時渲染全部商品
+        window.onload = function() {
+            try {
+                filterProducts('all');
+                updateCartDOM();
+            } catch (e) {
+                console.error("Error on window.onload:", e);
+            }
+        }
+    </script>
 </body>
 </html>
